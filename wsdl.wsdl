@@ -1,0 +1,37 @@
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:soapdemo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:soapdemo">
+<types>
+<xsd:schema targetNamespace="urn:soapdemo">
+<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+</xsd:schema>
+</types>
+<message name="helloRequest">
+<part name="name" type="xsd:string"/>
+</message>
+<message name="helloResponse">
+<part name="return" type="xsd:string"/>
+</message>
+<portType name="Soap DemoPortType">
+<operation name="hello">
+<input message="tns:helloRequest"/>
+<output message="tns:helloResponse"/>
+</operation>
+</portType>
+<binding name="Soap DemoBinding" type="tns:Soap DemoPortType">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="hello">
+<soap:operation soapAction="https://servicios.documentosige.com.co/service.php/hello" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+</binding>
+<service name="Soap Demo">
+<port name="Soap DemoPort" binding="tns:Soap DemoBinding">
+<soap:address location="https://servicios.documentosige.com.co:443/service.php"/>
+</port>
+</service>
+</definitions>
